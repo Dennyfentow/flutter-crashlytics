@@ -28,11 +28,11 @@ class _TransactionAuthDialogState extends State<TransactionAuthDialog> {
         style: TextStyle(fontSize: 64, letterSpacing: 24),
       ),
       actions: <Widget>[
-        ElevatedButton(
+        TextButton(
           onPressed: () => Navigator.pop(context),
           child: Text('Cancel'),
         ),
-        ElevatedButton(
+        TextButton(
           onPressed: () {
             widget.onConfirm(_passwordController.text);
             Navigator.pop(context);
