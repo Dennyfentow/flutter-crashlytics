@@ -9,6 +9,7 @@ import 'package:alura_crashlytics/models/transaction.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+import 'package:toast/toast.dart';
 
 class TransactionForm extends StatefulWidget {
   final Contact contact;
@@ -180,12 +181,18 @@ class _TransactionFormState extends State<TransactionForm> {
     BuildContext context, {
     String message = 'Unknown error',
   }) {
-    final snackBar = SnackBar(content: Text(message));
-    _scaffoldKey.currentState.showSnackBar(snackBar);
+    showToast(message, gravity: Toast.BOTTOM);
+    // final snackBar = SnackBar(content: Text(message));
+    // _scaffoldKey.currentState.showSnackBar(snackBar);
+
     // showDialog(
     //     context: context,
     //     builder: (contextDialog) {
     //       return FailureDialog(message);
     //     });
+  }
+
+  void showToast(String msg, {int duration = 5, int gravity}) {
+    Toast.show(msg, context, duration: duration, gravity: gravity);
   }
 }

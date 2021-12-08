@@ -1,6 +1,5 @@
 import 'package:alura_crashlytics/screens/contacts_list.dart';
 import 'package:alura_crashlytics/screens/transactions_list.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {
