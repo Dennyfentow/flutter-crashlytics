@@ -44,3 +44,6 @@ app.*.map.json
 /bytebank-api/database/
 
 /android/app/google-services.json
+
+# Firebase
+android/app/google-services.json
