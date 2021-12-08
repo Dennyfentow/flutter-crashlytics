@@ -7,6 +7,8 @@ void main() async {
   // Initialize Firebase.
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  FirebaseCrashlytics.instance.setUserIdentifier('id_alura123');
   // Erros de Aplicativos
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
