@@ -7,6 +7,7 @@ void main() async {
   // Initialize Firebase.
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  // Erros de Aplicativos
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
   runApp(BytebankApp());
@@ -19,11 +20,12 @@ class BytebankApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.green[900],
-        accentColor: Color.fromRGBO(71, 161, 56, 1),
         buttonTheme: ButtonThemeData(
           buttonColor: Color.fromRGBO(71, 161, 56, 1),
           textTheme: ButtonTextTheme.primary,
         ),
+        colorScheme: ColorScheme.fromSwatch()
+            .copyWith(secondary: Color.fromRGBO(71, 161, 56, 1)),
       ),
       home: Dashboard(),
     );

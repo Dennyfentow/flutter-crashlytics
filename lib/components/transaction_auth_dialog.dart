@@ -12,7 +12,6 @@ class TransactionAuthDialog extends StatefulWidget {
 }
 
 class _TransactionAuthDialogState extends State<TransactionAuthDialog> {
-
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -29,11 +28,11 @@ class _TransactionAuthDialogState extends State<TransactionAuthDialog> {
         style: TextStyle(fontSize: 64, letterSpacing: 24),
       ),
       actions: <Widget>[
-        FlatButton(
+        ElevatedButton(
           onPressed: () => Navigator.pop(context),
           child: Text('Cancel'),
         ),
-        FlatButton(
+        ElevatedButton(
           onPressed: () {
             widget.onConfirm(_passwordController.text);
             Navigator.pop(context);

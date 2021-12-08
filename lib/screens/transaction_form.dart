@@ -6,6 +6,7 @@ import 'package:alura_crashlytics/components/transaction_auth_dialog.dart';
 import 'package:alura_crashlytics/http/webclients/transaction_webclient.dart';
 import 'package:alura_crashlytics/models/contact.dart';
 import 'package:alura_crashlytics/models/transaction.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -74,7 +75,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: SizedBox(
                   width: double.maxFinite,
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     child: Text('Transfer'),
                     onPressed: () {
                       final double value =
@@ -134,14 +135,19 @@ class _TransactionFormState extends State<TransactionForm> {
     setState(() {
       _sending = true;
     });
-    final Transaction transaction =
-    await _webClient.save(transactionCreated, password).catchError((e) {
-      print('Erro aqui: $e');
+    final Transaction transaction = await _webClient
+        .save(transactionCreated, password)
+        .catchError((e, stackTrace) {
+      // print('Erro aqui: $e');
+      FirebaseCrashlytics.instance.recordError(e.message, stackTrace);
+
       _showFailureMessage(context, message: e.message);
-    }, test: (e) => e is HttpException).catchError((e) {
+    }, test: (e) => e is HttpException).catchError((e, stackTrace) {
+      FirebaseCrashlytics.instance.recordError(e.message, stackTrace);
       _showFailureMessage(context,
           message: 'timeout submitting the transaction');
-    }, test: (e) => e is TimeoutException).catchError((e) {
+    }, test: (e) => e is TimeoutException).catchError((e, stacktrace) {
+      FirebaseCrashlytics.instance.recordError(e.message, stacktrace);
       _showFailureMessage(context);
     }).whenComplete(() {
       setState(() {
